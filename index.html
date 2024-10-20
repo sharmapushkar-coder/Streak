@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #counter {
+            font-size: 24px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="counter">0</div>
+    <button id="increaseBtn">+1</button>
+    <button id="decreaseBtn">-1</button>
+    <button id="restartBtn">Restart</button>
+
+    <script>
+        // Fetch the current count from local storage or initialize it to 0
+        let count = localStorage.getItem('count');
+        count = count ? parseInt(count) : 0;
+        document.getElementById('counter').innerText = count;
+
+        // Function to update the display and local storage
+        function updateDisplay() {
+            document.getElementById('counter').innerText = count;
+            localStorage.setItem('count', count);
+        }
+
+        // Event listeners for the buttons
+        document.getElementById('increaseBtn').addEventListener('click', function() {
+            count += 1;
+            updateDisplay();
+        });
+
+        document.getElementById('decreaseBtn').addEventListener('click', function() {
+            count -= 1;
+            updateDisplay();
+        });
+
+        document.getElementById('restartBtn').addEventListener('click', function() {
+            count = 0;
+            updateDisplay();
+        });
+    </script>
+
+</body>
+</html>
