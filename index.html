@@ -51,7 +51,7 @@
 </head>
 <body>
 
-    <div id="counter">0</div>
+    <div id="counter">0 ❓</div>
     <button id="increaseBtn">+1</button>
     <button id="decreaseBtn">-1</button>
     <button id="restartBtn">Restart</button>
@@ -60,12 +60,23 @@
         // Fetch the current count from local storage or initialize it to 0
         let count = localStorage.getItem('count');
         count = count ? parseInt(count) : 0;
-        document.getElementById('counter').innerText = count;
+        updateDisplay();
 
         // Function to update the display and local storage
         function updateDisplay() {
-            document.getElementById('counter').innerText = count;
+            document.getElementById('counter').innerText = `${count} ${getEmoji(count)}`;
             localStorage.setItem('count', count);
+        }
+
+        // Function to get the appropriate emoji based on count
+        function getEmoji(count) {
+            if (count > 1) {
+                return '🔥'; // Fire emoji
+            } else if (count === 1) {
+                return '🎉'; // Party emoji
+            } else {
+                return '❓'; // Question mark
+            }
         }
 
         // Event listeners for the buttons
@@ -75,8 +86,10 @@
         });
 
         document.getElementById('decreaseBtn').addEventListener('click', function() {
-            count -= 1;
-            updateDisplay();
+            if (count > 0) {
+                count -= 1;
+                updateDisplay();
+            }
         });
 
         document.getElementById('restartBtn').addEventListener('click', function() {
