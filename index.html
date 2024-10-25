@@ -16,6 +16,29 @@
             height: 100vh; /* Full height for vertical centering */
             margin: 0;
         }
+        #inputBox {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #sendButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #output {
+            display: none;
+            font-size: 24px;
+            margin-top: 20px;
+            animation: smash 1.5s forwards;
+        }
+
+        @keyframes smash {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.5) rotate(10deg); }
+            100% { transform: scale(0); opacity: 0; }
+        }
         #counter {
             font-size: 48px;
             margin: 20px;
@@ -66,12 +89,39 @@
         <button id="decreaseBtn">-1</button>
         <button id="restartBtn">Restart</button>
     </div>
-
+     <br><.br>
+     <br></br>
+     <br></br>
+         <input type="text" id="inputBox" placeholder="Type something..." />
+         <button id="sendButton">Send</button>
+         <div id="output"></div>
     <footer>
         © PUSHKAR
     </footer>
 
     <script>
+         const sendButton = document.getElementById('sendButton');
+        const inputBox = document.getElementById('inputBox');
+        const output = document.getElementById('output');
+
+        sendButton.addEventListener('click', function() {
+            const text = inputBox.value;
+            if (text.trim() !== "") {
+                inputBox.style.display = 'none';
+                sendButton.style.display = 'none';
+
+                output.textContent = text;
+                output.style.display = 'block';
+
+                setTimeout(() => {
+                    output.style.animation = 'smash 1.5s forwards';
+                    setTimeout(() => {
+                        output.style.display = 'none';
+                        output.style.animation = ''; // Reset animation
+                    }, 500); // Wait for animation to finish
+                }, 100); // Delay before starting the animation
+            }
+        });
         // Fetch the current count from local storage or initialize it to 0
         let count = localStorage.getItem('count');
         count = count ? parseInt(count) : 0;
