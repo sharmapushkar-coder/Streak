@@ -93,13 +93,18 @@
      <br></br>
      <br></br>
          <input type="text" id="inputBox" placeholder="Type something..." />
-         <button id="sendButton">Send</button>
+         <button id="sendButton"onclick="re()">Send</button>
          <div id="output"></div>
     <footer>
         © PUSHKAR
     </footer>
 
     <script>
+        function re(){
+            setTimeout(function(){
+                location.href=''
+            },3000)
+        }
          const sendButton = document.getElementById('sendButton');
         const inputBox = document.getElementById('inputBox');
         const output = document.getElementById('output');
